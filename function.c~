@@ -1,0 +1,54 @@
+#include "main.h"
+/**
+ * _read - read
+ * @rea: read
+ * Return: 0 always success
+ */
+int _read(int rea, char **buffer)
+{
+	if (rea == -1)
+	{
+		if (isatty(0))
+			write(STDIN_FILENO, "\n", 1);
+		free(&buffer);
+		return (0);
+	}
+	if (rea == 0)
+	{
+		if (isatty(0))
+		{
+			write(STDIN_FILENO, "\n", 1);
+		}
+	}
+}
+/**
+ * _result - this is the simple shell main function
+ * @ar: str
+ * @buf: str
+ * @xfla: ban
+ * @resul: comp
+ * Return: 0 always success
+ */
+
+int _result(char ***ar, char **buf, int xfla, int resul)
+{
+	if (resul == 0)
+	{
+		free(ar[0]);
+		free(buf[0]);
+		exit(xfla);
+	}
+	xfla = 0;
+	if (result == 2)
+	{
+		free(ar[0]);
+		free(buf[0]);
+	}
+	else if (resul == 1)
+	{
+		print_env();
+		free(ar[0]);
+		free(buf[0]);
+	}
+	return (xfla);
+}

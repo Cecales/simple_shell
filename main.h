@@ -23,7 +23,11 @@ typedef struct built_in
 	char *str;
 	struct built_in *next;
 } built_in_t;
+int _read(int rea, char **buffer);
+int _result(char ***ar, char **buf, int xfla, int resul);
 void handle_sigint(int sig);
+void direc_fat(char *str, char **temp);
+void obt_dir(void);
 int _strcom(char *str_1, char *str_2);
 void _cd(char *arg);
 extern char **environ;
