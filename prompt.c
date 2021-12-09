@@ -13,11 +13,9 @@ char *stringdup(const char *str)
 
 	if (str == NULL)
 		return (NULL);
-
 	for (i = 0; str[i] != '\0'; i++)
-		;
-
-	ptr = malloc(sizeof(char) * (i + 1));
+		continue;
+	ptr = malloc(sizeof(char) * i);
 
 	if (!ptr)
 		return (NULL);

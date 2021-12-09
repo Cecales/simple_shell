@@ -1,5 +1,4 @@
 #include "main.h"
-#include "main.h"
 /**
  * _buff - this is the simple shell main function
  * @buffer: str
@@ -96,7 +95,7 @@ void _wh(char ***array, int *ex_status, int *cont, pid_t *c_pid)
 void direc_fat(char *str, char **temp)
 {
 	int count = 0, a = 0, count_sla = 0;
-
+	
 	for (; str[count]; count++)
 	{
 		if (str[count] == 47)
@@ -104,9 +103,16 @@ void direc_fat(char *str, char **temp)
 		if (count_sla == 3)
 			break;
 	}
-	temp[0] = malloc(count * sizeof(char));
-	for (; a <= count; a++)
+	
+	temp[0] = malloc(sizeof(char) * (count + 1));
+	if (temp[0] == NULL)
+	{
+		free(temp[0]);
+		return;
+	}
+	for (; str[a]; a++)
 		temp[0][a] = str[a];
+	temp[0][a] = '\0';
 }
 /**
  * obt_dir - Struct to handle the built-ins commands

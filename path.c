@@ -19,12 +19,14 @@ int path(char **array, int cont)
 
 	if (_which(array[0]) == 0)
 	{
+		
 		_wh(&array, &ex_status, &cont, &c_pid);
 		free(path_copy);
 		return (ex_status);
 	}
 	else
 	{
+		printf("----------------------- %s\n", array[1]);
 		token = strtok(path_copy, ":");
 		while (token != NULL)
 		{
@@ -41,6 +43,7 @@ int path(char **array, int cont)
 				}
 				else
 				{
+					free(path_copy);
 					error(array[0], cont, 1);
 					return (2);
 				}
@@ -48,6 +51,7 @@ int path(char **array, int cont)
 			token = strtok(NULL, ":");
 			free(cats);
 		}
+		
 		free(path_copy);
 		error(array[0], cont, 0);
 	}
@@ -61,12 +65,17 @@ void _cd(char *arg)
 {
 	int cd = 0;
 
-	cd = chdir(arg);
-	if (cd == 0)
-		printf("ok\n");
+	if (arg != NULL)
+	{
+		cd = chdir(arg);
+		if (cd < 0)
+		{
+			error(arg, _strlen(arg), 0);
+		}
+	}
 	else
 	{
-		error(arg, _strlen(arg), 0);
+		obt_dir();
 	}
 }
 /**

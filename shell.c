@@ -33,6 +33,10 @@ int main(void)
 			if (fun == -2)
 				break;
 		}
+		else
+			free(buffer);
+		
 	}
+	free(buffer);
 	return (0);
 }
