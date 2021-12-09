@@ -1,4 +1,54 @@
 #include "main.h"
+#include "main.h"
+/**
+ * _buff - this is the simple shell main function
+ * @buffer: str
+ * @cont: str
+ * @xflag: ban
+ * Return: 0 always success
+ */
+int _buff(char *buffer, int *cont, int *xflag)
+{
+	char **array;
+	int result, tok_size = 0;
+
+	if (buffer[_strlen(buffer) - 1] == '\n')
+		buffer[_strlen(buffer) - 1] = '\0';
+	tok_size = toksize(buffer);
+	if (tok_size == -1)
+		return (-2);
+	array = tokenize(buffer);
+	if (_strcom(array[0], "cd") == 0)
+	{
+		_cd(array[1]);
+	}
+	else
+	{
+		result = str_comp(array, tok_size);
+		if (result == 0)
+		{
+			free(array);
+			return (-1);
+		}
+		xflag[0] = 0;
+		if (result == 2)
+		{
+			free(array);
+			free(buffer);
+		}
+		else if (result == 1)
+		{
+			print_env();
+			free(array);
+			free(buffer);
+		}
+		xflag[0] = path(array, cont[0]);
+	}
+	free(buffer);
+	free(array);
+	return (0);
+}
+
 /**
  * _read - read
  * @rea: read
@@ -24,35 +74,18 @@ int _read(int rea, char **buffer)
 	return (1);
 }
 /**
- * _result - this is the simple shell main function
- * @ar: str
- * @buf: str
- * @xfla: ban
- * @resul: comp
- * Return: 0 always success
+ * _wh - wh
+ * @array: read
+ * @ex_status: status
+ * @cont: count
+ * @c_pid: pid
  */
-
-int _result(char ***ar, char **buf, int xfla, int resul)
+void _wh(char ***array, int *ex_status, int *cont, pid_t *c_pid)
 {
-	if (resul == 0)
-	{
-		free(ar[0]);
-		free(buf[0]);
-		return (-1);
-	}
-	xfla = 0;
-	if (resul == 2)
-	{
-		free(ar[0]);
-		free(buf[0]);
-	}
-	else if (resul == 1)
-	{
-		print_env();
-		free(ar[0]);
-		free(buf[0]);
-	}
-	return (xfla);
+	if (access(array[0][0], X_OK) == 0)
+		ex_status[0] = exec(c_pid[0], array[0], cont[0]);
+	else
+			error(array[0][0], cont[0], 1);
 }
 
 /**

@@ -23,6 +23,9 @@ typedef struct built_in
 	char *str;
 	struct built_in *next;
 } built_in_t;
+void _wh(char ***array, int *ex_status, int *cont, pid_t *c_pid);
+int _read(int rea, char **buffer);
+int _buff(char *buffer, int *cont, int *xflag);
 int _read(int rea, char **buffer);
 int _result(char ***ar, char **buf, int xfla, int resul);
 void handle_sigint(int sig);

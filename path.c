@@ -12,17 +12,15 @@
 
 int path(char **array, int cont)
 {
-	char *path_original = _getenv("PATH");
-	char  *path_copy = stringdup(path_original), *token, *ptr = array[0], *cats;
+	char *path_original = _getenv("PATH"), *path_copy = stringdup(path_original);
+	char *token, *ptr = array[0], *cats;
 	pid_t c_pid = 0;
 	int ex_status = 0;
 
 	if (_which(array[0]) == 0)
 	{
-		if (access(array[0], X_OK) == 0)
-			ex_status = exec(c_pid, array, cont);
-		else
-			error(array[0], cont, 1);
+		_wh(&array, &ex_status, &cont, &c_pid);
+		free(path_copy);
 		return (ex_status);
 	}
 	else
@@ -37,6 +35,8 @@ int path(char **array, int cont)
 				{
 					array[0] = cats;
 					ex_status = exec(c_pid, array, cont);
+					free(cats);
+					free(path_copy);
 					return (ex_status);
 				}
 				else
@@ -48,9 +48,9 @@ int path(char **array, int cont)
 			token = strtok(NULL, ":");
 			free(cats);
 		}
+		free(path_copy);
 		error(array[0], cont, 0);
 	}
-	free(path_copy);
 	return (127);
 }
 /**
@@ -61,16 +61,13 @@ void _cd(char *arg)
 {
 	int cd = 0;
 
-	if (arg != NULL)
-	{
-		cd = chdir(arg);
-		if (cd == 0)
-			printf("ok\n");
-		else
-			error(arg, _strlen(arg), 0);
-	}
+	cd = chdir(arg);
+	if (cd == 0)
+		printf("ok\n");
 	else
-		obt_dir();
+	{
+		error(arg, _strlen(arg), 0);
+	}
 }
 /**
  * _strcom - Struct to handle the built-ins commands
