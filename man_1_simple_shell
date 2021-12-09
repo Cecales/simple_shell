@@ -32,30 +32,21 @@ SIMPLE_SHELL$ ls -l
 EXAMPLE 3:
 SIMPLE_SHELL$ cat textfile
 .SS
-
-
-.SS
 EXAMPLE 4:
 $ echo "ls -l" | ./hsh
 
-.SH BUILTIN COMMANDS
-.SS alias
-- create or list an alias
+.SH SUPORTTED COMMANDS
+.SS ls
+- used to list files or directories 
 
 .SS cd
 - change directory
 
-.SS env
-- list the current environment variable
+.SS pwd 
+- stands for print working directory
 
 .SS exit
 - exit from shell
-
-.SS help
-- display help for a builtin command
-
-.SH SEE ALSO
-DASH(1)
 
 .SH BUGS
 No known bugs
