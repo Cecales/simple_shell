@@ -1,43 +1,38 @@
 #include "main.h"
-
 /**
  * path - a function that handles path.
- * How? Takes the command that was typed in the shell, checks
- * in which directory inside PATH the command is located and
- * executes the command.
  * @array: an array of string pointers.
  * @cont: the loop counter from getline
+ * @ex_status: control of the exit
  * Return: return concatenated string; otherwise: NULL.
  */
-
-int path(char **array, int cont)
+int path(char **array, int cont, int *ex_status)
 {
 	char *path_original = _getenv("PATH"), *path_copy = stringdup(path_original);
-	char *token, *ptr = array[0], *cats;
+	char *token, *cats;
 	pid_t c_pid = 0;
-	int ex_status = 0;
 
 	if (_which(array[0]) == 0)
 	{
-		_wh(&array, &ex_status, &cont, &c_pid);
+		_wh(&array, &ex_status[0], &cont, &c_pid);
 		free(path_copy);
-		return (ex_status);
+		return (ex_status[0]);
 	}
 	else
 	{
 		token = strtok(path_copy, ":");
 		while (token != NULL)
 		{
-			cats = str_concat(token, ptr, 1);
+			cats = str_concat(token, array[0], 1);
 			if (_which(cats) == 0)
 			{
 				if (access(cats, X_OK) == 0)
 				{
 					array[0] = cats;
-					ex_status = exec(c_pid, array, cont);
+					ex_status[0] = exec(c_pid, array, cont);
 					free(cats);
 					free(path_copy);
-					return (ex_status);
+					return (ex_status[0]);
 				}
 				else
 				{
@@ -49,7 +44,6 @@ int path(char **array, int cont)
 			token = strtok(NULL, ":");
 			free(cats);
 		}
-		
 		free(path_copy);
 		error(array[0], cont, 0);
 	}

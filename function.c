@@ -9,7 +9,7 @@
 int _buff(char *buffer, int *cont, int *xflag)
 {
 	char **array;
-	int result, tok_size = 0;
+	int result, tok_size = 0, buff = 0;
 
 	if (buffer[_strlen(buffer) - 1] == '\n')
 		buffer[_strlen(buffer) - 1] = '\0';
@@ -41,7 +41,7 @@ int _buff(char *buffer, int *cont, int *xflag)
 			free(array);
 			free(buffer);
 		}
-		xflag[0] = path(array, cont[0]);
+		xflag[0] = path(array, cont[0], &buff);
 	}
 	free(buffer);
 	free(array);
@@ -95,7 +95,7 @@ void _wh(char ***array, int *ex_status, int *cont, pid_t *c_pid)
 void direc_fat(char *str, char **temp)
 {
 	int count = 0, a = 0, count_sla = 0;
-	
+
 	for (; str[count]; count++)
 	{
 		if (str[count] == 47)
@@ -103,7 +103,6 @@ void direc_fat(char *str, char **temp)
 		if (count_sla == 3)
 			break;
 	}
-	
 	temp[0] = malloc(sizeof(char) * (count + 1));
 	if (temp[0] == NULL)
 	{

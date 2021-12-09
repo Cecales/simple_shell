@@ -49,6 +49,6 @@ int str_comp(char **array, int size);
 char *_getenv(const char *name);
 int _which(char *file);
 char *str_concat(char *s1, char *s2, int flag);
-int path(char **array, int cont);
+int path(char **array, int cont, int *ex_status);
 
 #endif

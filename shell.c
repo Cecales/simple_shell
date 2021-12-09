@@ -35,7 +35,6 @@ int main(void)
 		}
 		else
 			free(buffer);
-		
 	}
 	free(buffer);
 	return (0);
