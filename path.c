@@ -19,14 +19,12 @@ int path(char **array, int cont)
 
 	if (_which(array[0]) == 0)
 	{
-		
 		_wh(&array, &ex_status, &cont, &c_pid);
 		free(path_copy);
 		return (ex_status);
 	}
 	else
 	{
-		printf("----------------------- %s\n", array[1]);
 		token = strtok(path_copy, ":");
 		while (token != NULL)
 		{
