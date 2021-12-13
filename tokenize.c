@@ -34,25 +34,54 @@ int toksize(char *str)
  * @str: string to tokenize
  * Return: array
  */
-
-char **tokenize(char *str)
+void tokenize(char *str, char ***array)
 {
-	char *token, **array;
-	int i = 0, words;
+	char *token = NULL;
+	int i = 0, words = 0, cort = 0, f = 0;
 
 	words = toksize(str);
 	if (!words)
-		return (NULL);
-	array = malloc(sizeof(char *) * (words + 1));
-	if (!array)
-		return (NULL);
-	token = strtok(str, " \t");
-	while (token != NULL)
+		return;
+	words++;
+	printf("el tamanio del array va a ser de %d */*/*/*/*/\n", words);
+	array[0] = malloc(sizeof(char *) * words);
+	if (!array[0])
+		return;
+	cort = _strtok(str, 10, cort, &token);
+	printf("al salir de _strtok tokem contiene %s-------------", token);
+	if (str[cort])
 	{
-		array[i] = token;
-		token = strtok(NULL, " \t");
+		array[0][i] = token;
+		
+		while (str[cort] && cort != -1)
+		{
+			i++;
+			printf("---------------entro---------yok\n");
+			cort = _strtok(str, 10, cort, &token);
+			array[0][i] = malloc(sizeof(char *) * (_strlen(token) + 1));
+			for (;token[f]; f++)
+				array[0][i][f] = token[f];
+			array[0][i][f] = '\0';
+			f = 0;
+			free(token);	
+			printf("sssssssssss***/*/*/*/---------------- %d\n", cort);
+			
+		}
 		i++;
+		printf("array em 1*-*-*-*-*-*-*-*-*-*%d\n", i);
+		array[0][i] = NULL;
 	}
-	array[i] = NULL;
-	return (array);
+	else
+	{
+		array[0][0] = malloc(sizeof(char *) * (_strlen(token) + 1));
+		for (;token[f]; f++)
+			array[0][0][f] = token[f];
+		array[0][0][f] = '\0';
+		free(token);
+		printf("*****************salio**************\n");
+		printf("tamaño de token de tokenize es de */*/*/*/*/*/*/*/*/*/*/*/*/%lu\n", sizeof(token));
+		array[0][1] = NULL;
+		printf("*****************str_array**************%s\n", array[0][0]);
+		
+	}
 }

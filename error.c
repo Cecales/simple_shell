@@ -93,3 +93,13 @@ unsigned int get_ppid(void)
 	ppid = getppid();
 	return (ppid);
 }
+
+void _free(char **tokens)
+{
+	int i = 1;
+
+	for (; tokens[i] != 0; i++)
+		free(tokens[i]);
+	free(tokens);
+	printf("tamaño de tokens es de -------%lu\n", sizeof(tokens));
+}

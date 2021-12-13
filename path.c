@@ -9,9 +9,10 @@
 int path(char **array, int cont, int *ex_status)
 {
 	char *path_original = _getenv("PATH"), *path_copy = stringdup(path_original);
-	char *token, *cats;
+	char *token = NULL, *cats = NULL;
 	pid_t c_pid = 0;
-
+	int cort = 0;
+	
 	if (_which(array[0]) == 0)
 	{
 		_wh(&array, &ex_status[0], &cont, &c_pid);
@@ -20,31 +21,46 @@ int path(char **array, int cont, int *ex_status)
 	}
 	else
 	{
-		token = strtok(path_copy, ":");
+		
+		cort = _strtok(path_copy, 58, cort, &token);
 		while (token != NULL)
 		{
-			cats = str_concat(token, array[0], 1);
+			printf("--------------------------------------\n");
+			printf("--------------%d\n", _strlen(array[0]));
+			str_concat(token, array[0], 1, &cats);
 			if (_which(cats) == 0)
 			{
+				printf("entro al if del paht y  en el token es %s\n", token);
 				if (access(cats, X_OK) == 0)
 				{
+					printf("entro al if acces-----------\n");
 					array[0] = cats;
-					ex_status[0] = exec(c_pid, array, cont);
+					ex_status[0] = exec(c_pid, array, cont, cats);
+					printf("la devolucin de ex_es--------- %d", ex_status[0]);
+					free(token);
 					free(cats);
 					free(path_copy);
 					return (ex_status[0]);
 				}
 				else
 				{
+					printf("entro al else------------\n");
+					free(token);
 					free(path_copy);
+					free(cats);
 					error(array[0], cont, 1);
 					return (2);
 				}
 			}
-			token = strtok(NULL, ":");
+			free(token);
+			token = NULL;
+			cort = _strtok(path_copy, 58, cort, &token);
 			free(cats);
+			cats = NULL;
 		}
 		free(path_copy);
+		free(token);
+		free(cats);
 		error(array[0], cont, 0);
 	}
 	return (127);

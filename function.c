@@ -8,22 +8,25 @@
  */
 int _buff(char *buffer, int *cont, int *xflag)
 {
-	char **array;
-	int result, tok_size = 0, buff = 0;
+	char **array = NULL;
+	int result = 0, tok_size = 0, buff = 0;
 
 	if (buffer[_strlen(buffer) - 1] == '\n')
 		buffer[_strlen(buffer) - 1] = '\0';
 	tok_size = toksize(buffer);
 	if (tok_size == -1)
 		return (-2);
-	array = tokenize(buffer);
+	tokenize(buffer, &array);
+	printf("------------------tokenize-----------------------\n");
+	printf("---------en tokenize esta %s----------------------\n", array[0]);
+	printf("------------------tokenize-----------------------\n");
+
 	if (_strcom(array[0], "cd") == 0)
-	{
 		_cd(array[1]);
-	}
 	else
 	{
 		result = str_comp(array, tok_size);
+		printf("result//////////////////////////////////////////////////////////////////%d\n", result);
 		if (result == 0)
 		{
 			free(array);
@@ -41,9 +44,17 @@ int _buff(char *buffer, int *cont, int *xflag)
 			free(array);
 			free(buffer);
 		}
-		xflag[0] = path(array, cont[0], &buff);
+		else
+		{
+			printf("------------------else-----------------------\n");
+			printf("---------en esle esta %s----------------------\n", array[0]);
+			printf("------------------else-----------------------\n");
+			xflag[0] = path(array, cont[0], &buff);
+		}
 	}
 	free(buffer);
+	_free(array);
+	printf("tamaño de array es de -------%lu\n", sizeof(array));
 	free(array);
 	return (0);
 }
@@ -81,8 +92,9 @@ int _read(int rea, char **buffer)
  */
 void _wh(char ***array, int *ex_status, int *cont, pid_t *c_pid)
 {
+	printf("entro a _wh-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n");
 	if (access(array[0][0], X_OK) == 0)
-		ex_status[0] = exec(c_pid[0], array[0], cont[0]);
+		ex_status[0] = exec(c_pid[0], array[0], cont[0], array[0][0]);
 	else
 			error(array[0][0], cont[0], 1);
 }
@@ -103,7 +115,7 @@ void direc_fat(char *str, char **temp)
 		if (count_sla == 3)
 			break;
 	}
-	temp[0] = malloc(sizeof(char) * (count + 1));
+	temp[0] = malloc(sizeof(char) * count);
 	if (temp[0] == NULL)
 	{
 		free(temp[0]);
@@ -118,7 +130,7 @@ void direc_fat(char *str, char **temp)
  */
 void obt_dir(void)
 {
-	char ob_directorio[1024],  *direc = NULL;
+	char ob_directorio[512],  *direc = NULL;
 
 	getcwd(ob_directorio, sizeof(ob_directorio));
 	if (ob_directorio == NULL)

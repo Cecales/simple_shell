@@ -8,9 +8,10 @@
  * Return: 0 or -1
  */
 
-int exec(pid_t c_pid, char **array, int cont)
+int exec(pid_t c_pid, char **array, int cont, char *cast)
 {
-	int status;
+	int status = 0;
+	(void)cast;
 
 	c_pid = fork();
 	if (c_pid == -1)
@@ -42,4 +43,44 @@ int exec(pid_t c_pid, char **array, int cont)
 		}
 	}
 	return (0);
+}
+
+
+int _strtok(char *str, char court, int star, char **com)
+{
+	int count = 0, count_st = star, count_2 = 0;
+	printf("en token entra------------------------- %s\n", com[0]);
+	if (str[star] == ' ')
+	{
+		star++;
+		if (str[star] != ' ' && str[star] != '\0')
+			count_st = star;
+		else
+			return (-1);
+	}
+	
+	for (; (str[count_st] != ' ' && str[count_st] != '\0') && str[count_st] != court; count_st++, count++)
+		continue;
+
+	if (star < count_st)
+	{
+		
+		com[0] = malloc((count + 1) * sizeof(char));
+		printf("***************************\n");
+		for (;count > count_2; count_2++, star++)
+		{
+			com[0][count_2] = str[star];
+		}
+		
+		com[0][count_2] = '\0';
+		printf("***************************\n");
+		star++;
+		
+		return (star);
+	}
+	else
+	{
+		printf("***************************\n");
+		return (star++);
+	}
 }

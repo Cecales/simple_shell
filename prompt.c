@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * stringdup - function to return pointer to string (duplicate string)
  * @str: string to duplicate
@@ -15,14 +14,13 @@ char *stringdup(const char *str)
 		return (NULL);
 	for (i = 0; str[i] != '\0'; i++)
 		continue;
-	ptr = malloc(sizeof(char) * i);
+	ptr = malloc(sizeof(char) * (i + 1));
 
 	if (!ptr)
 		return (NULL);
 
 	for (j = 0; j < i; j++)
 		ptr[j] = str[j];
-
 	return (ptr);
 }
 
@@ -53,7 +51,6 @@ int str_comp(char **array, int size)
 {
 	char *command[4] = {"exit", "env", ".", NULL};
 	char *ptr = array[0];
-
 	int i = 0, j = 0, flag = 0;
 
 	if (size != 1)
@@ -89,46 +86,56 @@ int str_comp(char **array, int size)
  * Return: char.
  */
 
-char *str_concat(char *s1, char *s2, int flag)
+void str_concat(char *s1, char *s2, int flag, char **ptr)
 {
-	int len1 = 0, len2 = 0, i, j;
-	char *ptr;
+	int len1 = 0, len2 = 0, i = 0, j = 0, s1_c = 0, s2_c = 0;
 
+	printf("********entro a str_concat************\n");
+	printf("********entro a s1 %s************\n", s1);
+	
+	printf("********tamaño de s1 %d************\n", _strlen(s1));
 	if (s1 == NULL)
 	{
-		s1 = malloc(sizeof(char));
+		s1_c = 1;
+		s1 = malloc(sizeof(char) * 1);
 		if (s1 == NULL)
-			return (NULL);
-		*s1 = '\0';
+			return;
+		s1[0] = '\0';
 	}
 	if (s2 == NULL)
 	{
-		s2 = malloc(sizeof(char));
+		printf("entro\n");
+		s2_c = 1;
+		s2 = malloc(sizeof(char) * 1);
 		if (s2 == NULL)
-			return (NULL);
-		*s2 = '\0';
+			return;
+		s2[0] = '\0';
 	}
-	while (s1[len1] != '\0')
-		len1++;
-
-	while (s2[len2] != '\0')
-		len2++;
-	ptr = malloc(sizeof(char) * (len1 + len2 + 1 + flag));
+		printf("s1********************\n");
+		len1 = _strlen(s1);
+		printf("s2********************\n");
+		len2 = _strlen(s2);
+		printf("s3********************\n");
+	ptr[0] = malloc(sizeof(char) * (len1 + len2 + 1 + flag));
 
 	if (ptr == NULL)
-		return (NULL);
+		return;
 
 	for (i = 0 ; s1[i] != '\0' ; i++)
-		ptr[i] = s1[i];
+		ptr[0][i] = s1[i];
 
 	if (flag == 1)
 	{
-		ptr[i] = '/';
+		ptr[0][i] = '/';
 		i++;
 	}
 	for (j = 0 ; j < (len2 + 1) ; j++, i++)
-		ptr[i] = s2[j];
-	return (ptr);
+		ptr[0][i] = s2[j];
+	if (s2_c == 1)
+		free(s2);
+	if (s1_c == 1)
+		free(s1);
+	printf("********salio a str_concat************\n");
 }
 /**
  * handle_sigint - This function returns the length of a string
@@ -139,3 +146,4 @@ void handle_sigint(int sig)
 	write(STDIN_FILENO, "$ ", 2);
 	(void)sig;
 }
+

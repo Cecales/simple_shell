@@ -32,6 +32,7 @@ int main(void)
 			}
 			if (fun == -2)
 				break;
+			printf("------------------------------------------------------------flag %d", xflag);
 		}
 		else
 			free(buffer);
