@@ -35,7 +35,7 @@ This shell supports a variety of commands:
 
 ### Flowchart
 ---
-![This is a alt text.](https://app.code2flow.com/u2YFWBk9nbPm.png)
+![This is a alt text.](https://app.code2flow.com/u2YFWBk9nbPm.svg)
 
 ### Files
 ---
