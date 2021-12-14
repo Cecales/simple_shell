@@ -16,23 +16,27 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 ---
 When using this shell, the syntax for running any command follows the familiar syntax when running a command in any other shell.
 
-
 ### Commands
 ---
 This shell supports a variety of commands:
 
 `pwd` - print working directory
 
-`cd` - change directory
-
 `ls` - lists files and directories within the file system, and shows detailed information about them
+
+`ctrl d` - alternative exit to the shell
 
 `env` - allows you to display your current environment or run a specified command in a changed environment
 
 `exit` - exit the shell
 
-### Compilation
+## Compilation
 ---
+
+### Flowchart
+---
+![This is a alt text.](https://app.code2flow.com/u2YFWBk9nbPm.png)
+
 ### Files
 ---
 Brief description of every file in this repository. Subject to change.
@@ -45,7 +49,6 @@ Brief description of every file in this repository. Subject to change.
 | env-environ.c | This file contains the functions to handle the enviroment |
 | error.c | Main program to handle the errors |
 | exec.c | File to execute the funtions of the shell |
-| function.c | File to manage redundant files |
 | main.h | Header file for the simple shell program |
 | path.c | Main program to handle the path |
 | prompt.c | Manage the strings obtained for the prompt |

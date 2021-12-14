@@ -17,33 +17,40 @@ The Simple Shell project is a major team project conducted by Martín Vidan and 
 The shell returns the error code given by the last completed command followed by either ctrl-d or exit with no status code.
 
 .SH SYNTAX
-SIMPLE_SHELL$ <command> <flags or options> <argument 1> <argument 2> ...
 
-$ <command> | ./hsh
-.SS
+.SS INTERACTIVE MODE
+
+$ <command> <flags or options>
 
 .SS
 EXAMPLE 1:
-SIMPLE_SHELL$ /bin/ls
+$ ./hsh
+($) /bin/ls
+hsh main.c shell.c
+($)
+($) exit
+$
+
+.SS NON-INTERACTIVE MODE
+
+$ <command> <flags or options> | ./hsh
+
 .SS
-EXAMPLE 2:
-SIMPLE_SHELL$ ls -l
-.SS
-EXAMPLE 3:
-SIMPLE_SHELL$ cat textfile
-.SS
-EXAMPLE 4:
-$ echo "ls -l" | ./hsh
+EXAMPLE 1:
+
+$ echo "/bin/ls" | ./hsh
+hsh main.c shell.c file_n.c ...
+$
 
 .SH SUPORTTED COMMANDS
 .SS ls
 - used to list files or directories 
 
-.SS cd
-- change directory
-
 .SS pwd 
 - stands for print working directory
+
+.SS ctrl d
+- alternative exit from shell 
 
 .SS exit
 - exit from shell
