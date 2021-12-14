@@ -23,17 +23,8 @@ typedef struct built_in
 	char *str;
 	struct built_in *next;
 } built_in_t;
-void _free(char **tokens);
-int _strtok(char *arg, char cort, int pos, char **temp);
-void _wh(char ***array, int *ex_status, int *cont, pid_t *c_pid);
-int _read(int rea, char **buffer);
-int _buff(char *buffer, int *cont, int *xflag);
-int _read(int rea, char **buffer);
-int _result(char ***ar, char **buf, int xfla, int resul);
 void handle_sigint(int sig);
-void direc_fat(char *str, char **temp);
-void obt_dir(void);
-int _strcom(char *str_1, char *str_2);
+int _strcom (char *str_1, char *str_2);
 void _cd(char *arg);
 extern char **environ;
 void print_env(void);
@@ -45,12 +36,12 @@ unsigned int get_pid(void);
 unsigned int get_ppid(void);
 char *stringdup(const char *str);
 int toksize(char *str);
-void tokenize(char *str, char ***array);
-int exec(pid_t c_pid, char **array, int cont, char *cast);
+char **tokenize(char *str);
+int exec(pid_t c_pid, char **array, int cont);
 int str_comp(char **array, int size);
 char *_getenv(const char *name);
 int _which(char *file);
-void str_concat(char *s1, char *s2, int flag, char **ptr);
-int path(char **array, int cont, int *ex_status);
+char *str_concat(char *s1, char *s2, int flag);
+int path(char **array, int cont);
 
 #endif
