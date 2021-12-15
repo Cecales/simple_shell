@@ -23,6 +23,9 @@ typedef struct built_in
 	char *str;
 	struct built_in *next;
 } built_in_t;
+
+void direc_fat(char *str, char **temp);
+void obt_dir(void);
 void handle_sigint(int sig);
 int _strcom (char *str_1, char *str_2);
 void _cd(char *arg);

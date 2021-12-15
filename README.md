@@ -22,6 +22,8 @@ This shell supports a variety of commands:
 
 `pwd` - print working directory
 
+`cd` - changes the current directory
+
 `ls` - lists files and directories within the file system, and shows detailed information about them
 
 `ctrl d` - alternative exit to the shell
@@ -54,6 +56,7 @@ Brief description of every file in this repository. Subject to change.
 | prompt.c | Manage the strings obtained for the prompt |
 | shell.c | File with the main components of the shell |
 | tokenize.c | Convert a string into tokens and count the number of tokens |
+| function.c | File to manage aditional functions |
 
 ## man_1_simple_shell
 ---

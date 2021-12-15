@@ -63,18 +63,11 @@ int path(char **array, int cont)
 	return (127);
 }
 
-void _cd(char *arg)
-{
-	int cd = 0;
-
-	cd = chdir(arg);
-	if (cd == 0)
-		printf("ok\n");
-	else
-	{
-		error(arg, _strlen(arg), 0);
-	}
-}
+/**
+ * _strcom - function to compare two strings
+ * @str_1: first string to compare
+ * @str_2: second string to compare
+ */
 
 int _strcom (char *str_1, char *str_2)
 {

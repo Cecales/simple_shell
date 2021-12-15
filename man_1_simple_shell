@@ -49,6 +49,9 @@ $
 .SS pwd 
 - stands for print working directory
 
+.SS cd 
+- change the current directory
+
 .SS ctrl d
 - alternative exit from shell 
 
